@@ -25,7 +25,7 @@ public class DragTarget : MonoBehaviour
         {
             Debug.Log("In");
             Placed = true;
-            dragable.PlaceToCenter(transform.position, true);
+            dragable.PlaceToCenter(transform, true);
         }
     }
 
@@ -36,7 +36,7 @@ public class DragTarget : MonoBehaviour
         {
             Debug.Log("out");
             Placed = true;
-            dragable.PlaceToCenter(transform.position, false);
+            dragable.PlaceToCenter(transform, false);
             ;
         }
     }

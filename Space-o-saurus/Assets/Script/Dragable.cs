@@ -26,7 +26,8 @@ public class Dragable : MonoBehaviour
     private Vector3 startPos = new Vector3();
     private float distance;
     private bool dragging;
-    private Vector3 newPos;
+    private Transform newPos;
+
     private bool draggable = true;
 
     private void Reset()
@@ -54,7 +55,8 @@ public class Dragable : MonoBehaviour
         dragging = false;
         if (Placed)
         {
-            transform.position = newPos;
+            transform.parent = newPos;
+            transform.position = newPos.position;
             OnPlaced?.Invoke();
             On_Placed?.Invoke(this);
         }
@@ -79,7 +81,7 @@ public class Dragable : MonoBehaviour
         }
     }
 
-    public void PlaceToCenter(Vector3 point, bool placed)
+    public void PlaceToCenter(Transform point, bool placed)
     {
         newPos = point;
         Placed = placed;
