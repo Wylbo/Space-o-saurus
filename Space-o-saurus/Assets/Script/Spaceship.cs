@@ -14,7 +14,7 @@ public class Spaceship : MonoBehaviour
     [SerializeField] protected AnimationCurve launchCurve = default;
 
     [Header("Animation Settings")]
-    [SerializeField] protected ParticleSystem launchParticules = null;
+    [SerializeField] protected List<ParticleSystem> launchParticules = null;
 
     [Header("Animation Settings")]
     [SerializeField] protected Animator animator = null;
@@ -40,7 +40,14 @@ public class Spaceship : MonoBehaviour
     public void Lauch()
     {
         animator.SetTrigger(lauchTriggerName);
-        if (launchParticules) launchParticules.Play();
+        if (launchParticules.Count > 0)
+        {
+            foreach (ParticleSystem ps in launchParticules)
+            {
+                ps.Play();
+            }
+        }
+
         if (coroutine != null)
         {
             Debug.LogWarning("Lauch coroutine already started");
@@ -68,7 +75,13 @@ public class Spaceship : MonoBehaviour
     protected void EndLauch()
     {
         OnLanded?.Invoke(this);
-        if (launchParticules) launchParticules.Stop();
+        if (launchParticules.Count > 0)
+        {
+            foreach (ParticleSystem ps in launchParticules)
+            {
+                ps.Stop();
+            }
+        }
     }
 
 }
