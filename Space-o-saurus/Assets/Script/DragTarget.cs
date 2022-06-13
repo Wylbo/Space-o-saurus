@@ -20,10 +20,10 @@ public class DragTarget : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("In");
         Dragable dragable = other.GetComponent<Dragable>();
         if (dragable.DragData.color == DragDataTarget.color && dragable.DragData.shape == DragDataTarget.shape)
         {
+            Debug.Log("In");
             Placed = true;
             dragable.PlaceToCenter(transform.position, true);
         }
@@ -31,10 +31,10 @@ public class DragTarget : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("out");
         Dragable dragable = other.GetComponent<Dragable>();
         if (dragable.DragData.color == DragDataTarget.color && dragable.DragData.shape == DragDataTarget.shape)
         {
+            Debug.Log("out");
             Placed = true;
             dragable.PlaceToCenter(transform.position, false);
             ;

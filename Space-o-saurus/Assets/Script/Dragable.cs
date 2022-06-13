@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class Dragable : MonoBehaviour
@@ -15,6 +16,10 @@ public class Dragable : MonoBehaviour
     [SerializeField]
     private DragData dragData;
     public DragData DragData => dragData;
+
+    public event UnityAction<Dragable> On_Placed;
+
+    public UnityEvent OnPlaced;
 
     public bool Placed { get; protected set; } = false;
 
@@ -48,7 +53,11 @@ public class Dragable : MonoBehaviour
     {
         dragging = false;
         if (Placed)
+        {
             transform.position = newPos;
+            OnPlaced?.Invoke();
+            On_Placed?.Invoke(this);
+        }
     }
 
     void Update()
