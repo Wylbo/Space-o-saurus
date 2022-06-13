@@ -14,10 +14,16 @@ public class DragableManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Dragables = new List<Dragable>();
+        foreach (Transform t in transform)
+        {
+            Dragables.Add(t.GetComponent<Dragable>());
+        }
+
         foreach (Dragable d in Dragables)
         {
             d.On_Placed += D_On_Placed;
-        }   
+        }
     }
 
     private void D_On_Placed(Dragable d)
@@ -32,6 +38,6 @@ public class DragableManager : MonoBehaviour
 
     private void AllPlaced()
     {
-        spaceship.Lauch();   
+        spaceship.Lauch();
     }
 }
